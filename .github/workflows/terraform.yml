@@ -1,0 +1,32 @@
+name: Terraform
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Check Terraform formatting
+        run: terraform fmt -check -recursive
+
+      - name: Validate each lab
+        shell: bash
+        run: |
+          for dir in labs/*; do
+            if [ -d "$dir" ]; then
+              echo "Validating $dir"
+              terraform -chdir="$dir" init -backend=false
+              terraform -chdir="$dir" validate
+            fi
+          done
