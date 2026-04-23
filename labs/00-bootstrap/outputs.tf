@@ -10,7 +10,7 @@ output "caller_arn" {
 
 output "current_region" {
   description = "Resolved AWS region."
-  value       = data.aws_region.current.name
+  value       = data.aws_region.current.region
 }
 
 output "aws_partition" {
