@@ -1,0 +1,10 @@
+aws_region         = "eu-west-3"
+aws_account_id     = "123456789012"
+bucket_name_prefix = "aws-saa-tf-s3-demo"
+environment        = "learning"
+force_destroy      = false
+
+project_tags = {
+  Owner   = "junior-mbogning"
+  Purpose = "terraform-training"
+}
